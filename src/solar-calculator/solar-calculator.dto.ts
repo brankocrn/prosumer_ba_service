@@ -36,13 +36,19 @@ export class CalculateSolarDto {
 }
 
 export class SolarCalculationResultDto {
+  /** 'pvgis' when live PVGIS data was used, 'fallback' when the API was unavailable */
+  dataSource: 'pvgis' | 'fallback';
   recommendedSystemKw: number;
   estimatedAnnualProductionKwh: number;
   numberOfPanels: number;
   roofCoveragePercent: number;
   selfSufficiencyPercent: number;
   estimatedAnnualSavingsEur: number;
+  estimatedMonthlySavingsEur: number;
   estimatedPaybackYears: number;
+  estimatedSystemCostEur: number;
   peakSunHoursPerDay: number;
   co2SavedKgPerYear: number;
+  co2SavedTonsPerYear: number;
+  batteryRecommendation: string;
 }

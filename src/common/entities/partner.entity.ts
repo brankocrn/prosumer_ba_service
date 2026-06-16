@@ -22,6 +22,27 @@ export class Partner {
   @Column({ length: 255, nullable: true })
   website: string;
 
+  @Column({ length: 100, nullable: true, comment: 'City where the partner operates' })
+  city: string;
+
+  @Column({ length: 10, nullable: true, comment: 'Country code, e.g. BiH or HR' })
+  country: string;
+
+  @Column({ type: 'text', nullable: true, comment: 'Short description shown on the marketplace card' })
+  description: string;
+
+  @Column({ type: 'decimal', precision: 3, scale: 1, nullable: true, default: null, comment: 'Aggregate rating 0–5' })
+  rating: number;
+
+  @Column({ type: 'int', nullable: true, default: null, comment: 'Number of completed projects' })
+  projectCount: number;
+
+  @Column({ length: 50, nullable: true, default: 'Verified', comment: 'Badge tier: Premium or Verified' })
+  badge: string;
+
+  @Column({ type: 'simple-array', nullable: true, comment: 'Comma-separated brand/skill tags shown as chips' })
+  tags: string[];
+
   @Column({ type: 'decimal', precision: 9, scale: 6, nullable: true, comment: 'Partner location latitude' })
   latitude: number;
 

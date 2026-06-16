@@ -26,7 +26,7 @@ export class SolarOfferService {
 
   async generate(dto: GenerateSolarOffersDto): Promise<GenerateSolarOffersResponseDto> {
     // ── 1. Solar sizing ───────────────────────────────────────────────────────
-    const calc = this.calculator.calculate(dto);
+    const calc = await this.calculator.calculate(dto);
 
     // ── 2. Active partners with coordinates + their products ──────────────────
     const partners = await this.partnerRepo.find({
