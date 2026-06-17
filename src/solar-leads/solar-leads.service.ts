@@ -14,7 +14,7 @@ export class SolarLeadsService {
   ) {}
 
   async create(dto: CreateSolarLeadDto): Promise<SolarLeadResponseDto> {
-    const annualKwh = Math.round((dto.monthlyBillEur * 12) / 0.25);
+    const annualKwh = Math.round((dto.monthlyBillKm * 12) / 0.29);
 
     // Run the full calculation (PVGIS → fallback)
     const calc = await this.calculator.calculate({
@@ -34,7 +34,7 @@ export class SolarLeadsService {
       latitude:         dto.latitude,
       longitude:        dto.longitude,
       locationCity:     dto.locationCity,
-      monthlyBillEur:   dto.monthlyBillEur,
+      monthlyBillKm:   dto.monthlyBillKm,
       roofAreaSqm:      dto.roofAreaSqm,
       roofAzimuthDegrees: dto.roofAzimuthDegrees,
       roofTiltDegrees:  dto.roofTiltDegrees ?? 30,
@@ -46,10 +46,10 @@ export class SolarLeadsService {
       recommendedSystemKw:         calc.recommendedSystemKw,
       estimatedAnnualProductionKwh: calc.estimatedAnnualProductionKwh,
       numberOfPanels:              calc.numberOfPanels,
-      estimatedSystemCostEur:      calc.estimatedSystemCostEur,
+      estimatedSystemCostKm:      calc.estimatedSystemCostKm,
       estimatedPaybackYears:       calc.estimatedPaybackYears,
       selfSufficiencyPercent:      calc.selfSufficiencyPercent,
-      estimatedAnnualSavingsEur:   calc.estimatedAnnualSavingsEur,
+      estimatedAnnualSavingsKm:   calc.estimatedAnnualSavingsKm,
       co2SavedTonsPerYear:         calc.co2SavedTonsPerYear,
     });
 

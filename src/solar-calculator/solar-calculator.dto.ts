@@ -43,10 +43,10 @@ export class SolarCalculationResultDto {
   numberOfPanels: number;
   roofCoveragePercent: number;
   selfSufficiencyPercent: number;
-  estimatedAnnualSavingsEur: number;
-  estimatedMonthlySavingsEur: number;
+  estimatedAnnualSavingsKm: number;
+  estimatedMonthlySavingsKm: number;
   estimatedPaybackYears: number;
-  estimatedSystemCostEur: number;
+  estimatedSystemCostKm: number;
   peakSunHoursPerDay: number;
   co2SavedKgPerYear: number;
   co2SavedTonsPerYear: number;

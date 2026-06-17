@@ -50,7 +50,7 @@ export class SolarLead {
 
   // ── Calculator inputs ──────────────────────────────────────────────────────
   @Column({ type: 'decimal', precision: 8, scale: 2 })
-  monthlyBillEur: number;
+  monthlyBillKm: number;
 
   @Column({ type: 'decimal', precision: 8, scale: 2 })
   roofAreaSqm: number;
@@ -94,7 +94,7 @@ export class SolarLead {
   numberOfPanels: number;
 
   @Column({ type: 'int', nullable: true })
-  estimatedSystemCostEur: number;
+  estimatedSystemCostKm: number;
 
   @Column({ type: 'decimal', precision: 5, scale: 1, nullable: true })
   estimatedPaybackYears: number;
@@ -103,7 +103,7 @@ export class SolarLead {
   selfSufficiencyPercent: number;
 
   @Column({ type: 'int', nullable: true })
-  estimatedAnnualSavingsEur: number;
+  estimatedAnnualSavingsKm: number;
 
   @Column({ type: 'decimal', precision: 5, scale: 1, nullable: true })
   co2SavedTonsPerYear: number;

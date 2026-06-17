@@ -39,10 +39,10 @@ export class CreateSolarLeadDto {
   locationCity?: string;
 
   // ── Calculator inputs ──────────────────────────────────────────────────────
-  @ApiProperty({ example: 120, description: 'Monthly electricity bill in EUR' })
+  @ApiProperty({ example: 120, description: 'Mjesečni račun za struju u KM' })
   @IsNumber()
   @Min(1)
-  monthlyBillEur: number;
+  monthlyBillKm: number;
 
   @ApiProperty({ example: 40, description: 'Available roof area in m²' })
   @IsNumber()
@@ -78,10 +78,10 @@ export class SolarLeadResponseDto {
   numberOfPanels: number;
   roofCoveragePercent: number;
   selfSufficiencyPercent: number;
-  estimatedAnnualSavingsEur: number;
-  estimatedMonthlySavingsEur: number;
+  estimatedAnnualSavingsKm: number;
+  estimatedMonthlySavingsKm: number;
   estimatedPaybackYears: number;
-  estimatedSystemCostEur: number;
+  estimatedSystemCostKm: number;
   peakSunHoursPerDay: number;
   co2SavedKgPerYear: number;
   co2SavedTonsPerYear: number;

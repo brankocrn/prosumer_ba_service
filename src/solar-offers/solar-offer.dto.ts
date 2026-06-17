@@ -42,9 +42,9 @@ export class ProductLineDto {
   productName: string;
   manufacturer: string;
   model: string;
-  unitPriceEur: number;
+  unitPriceKm: number;
   quantity: number;
-  subtotalEur: number;
+  subtotalKm: number;
   specs: Record<string, string | number>;
 }
 
@@ -70,10 +70,10 @@ export class SolarOfferDto {
   additionalProducts: ProductLineDto[];
 
   // Totals
-  subtotalEquipmentEur: number;
-  estimatedInstallationEur: number;
-  totalEur: number;
-  estimatedAnnualSavingsEur: number;
+  subtotalEquipmentKm: number;
+  estimatedInstallationKm: number;
+  totalKm: number;
+  estimatedAnnualSavingsKm: number;
   estimatedPaybackYears: number;
 }
 
@@ -85,7 +85,7 @@ export class GenerateSolarOffersResponseDto {
     selfSufficiencyPercent: number;
     peakSunHoursPerDay: number;
     co2SavedKgPerYear: number;
-    estimatedAnnualSavingsEur: number;
+    estimatedAnnualSavingsKm: number;
     estimatedPaybackYears: number;
   };
   offers: SolarOfferDto[];

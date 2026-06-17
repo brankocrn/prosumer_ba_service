@@ -56,9 +56,9 @@ export class AdminService {
       this.leadRepo
         .createQueryBuilder('l')
         .select('AVG(l.recommendedSystemKw)', 'avgSystemKw')
-        .addSelect('SUM(l.estimatedAnnualSavingsEur)', 'totalSavings')
+        .addSelect('SUM(l.estimatedAnnualSavingsKm)', 'totalSavings')
         .addSelect('AVG(l.estimatedPaybackYears)', 'avgPayback')
-        .addSelect('SUM(l.estimatedSystemCostEur)', 'totalSystemValue')
+        .addSelect('SUM(l.estimatedSystemCostKm)', 'totalSystemValue')
         .getRawOne(),
 
       // top cities (from locationCity or lat/lon label)
@@ -117,7 +117,7 @@ export class AdminService {
       })),
       avgSystemKw:      Math.round((Number(aggRow?.avgSystemKw)      || 0) * 10) / 10,
       avgPaybackYears:  Math.round((Number(aggRow?.avgPayback)        || 0) * 10) / 10,
-      totalSavingsEur:  Math.round( Number(aggRow?.totalSavings)      || 0),
+      totalSavingsKm:   Math.round( Number(aggRow?.totalSavings)      || 0),
       totalSystemValue: Math.round( Number(aggRow?.totalSystemValue)  || 0),
       topCities: topCities.map((r) => ({ city: r.city as string, count: Number(r.count) })),
 

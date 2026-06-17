@@ -12,7 +12,7 @@ import {
 } from './solar-offer.dto';
 
 const INSTALLATION_RATE = 0.20;
-const ELECTRICITY_PRICE_EUR_KWH = 0.15;
+const ELECTRICITY_PRICE_KM_KWH = 0.29;
 
 @Injectable()
 export class SolarOfferService {
@@ -104,16 +104,16 @@ export class SolarOfferService {
       const additionalLines = others.map((p) => this.buildLine(p, 1, {}));
 
       const equipmentTotal =
-        panelLine.subtotalEur +
-        (inverterLine?.subtotalEur ?? 0) +
-        (mountingLine?.subtotalEur ?? 0) +
-        additionalLines.reduce((s, l) => s + l.subtotalEur, 0);
+        panelLine.subtotalKm +
+        (inverterLine?.subtotalKm ?? 0) +
+        (mountingLine?.subtotalKm ?? 0) +
+        additionalLines.reduce((s, l) => s + l.subtotalKm, 0);
 
       const installationCost = Math.round(equipmentTotal * INSTALLATION_RATE);
-      const totalEur = equipmentTotal + installationCost;
+      const totalKm = equipmentTotal + installationCost;
       const annualProduction = actualSystemKw * calc.peakSunHoursPerDay * 365 * 0.8;
-      const annualSavings = Math.round(Math.min(annualProduction, dto.annualKwh) * ELECTRICITY_PRICE_EUR_KWH);
-      const paybackYears = annualSavings > 0 ? Math.round((totalEur / annualSavings) * 10) / 10 : 0;
+      const annualSavings = Math.round(Math.min(annualProduction, dto.annualKwh) * ELECTRICITY_PRICE_KM_KWH);
+      const paybackYears = annualSavings > 0 ? Math.round((totalKm / annualSavings) * 10) / 10 : 0;
 
       return {
         partnerId: partner.id,
@@ -131,10 +131,10 @@ export class SolarOfferService {
         inverter: inverterLine,
         mounting: mountingLine,
         additionalProducts: additionalLines,
-        subtotalEquipmentEur: equipmentTotal,
-        estimatedInstallationEur: installationCost,
-        totalEur,
-        estimatedAnnualSavingsEur: annualSavings,
+        subtotalEquipmentKm: equipmentTotal,
+        estimatedInstallationKm: installationCost,
+        totalKm,
+        estimatedAnnualSavingsKm: annualSavings,
         estimatedPaybackYears: paybackYears,
       };
     });
@@ -149,9 +149,9 @@ export class SolarOfferService {
       productName: product.name,
       manufacturer: product.manufacturer ?? '',
       model: product.model ?? '',
-      unitPriceEur: unitPrice,
+      unitPriceKm: unitPrice,
       quantity,
-      subtotalEur: Math.round(unitPrice * quantity * 100) / 100,
+      subtotalKm: Math.round(unitPrice * quantity * 100) / 100,
       specs,
     };
   }

@@ -16,8 +16,8 @@ const PEAK_SUN_HOURS_BY_LATITUDE: { maxLat: number; hours: number }[] = [
 const STANDARD_PANEL_POWER_W = 400;      // Watts per panel
 const STANDARD_PANEL_AREA_SQM = 1.7;    // m² per panel
 const SYSTEM_EFFICIENCY = 0.8;           // inverter + wiring losses (matches PVGIS loss=20%)
-const ELECTRICITY_PRICE_EUR_KWH = 0.15; // average retail price
-const SYSTEM_COST_EUR_PER_KW = 1200;    // installed cost
+const ELECTRICITY_PRICE_KM_KWH = 0.29; // prosječna maloprodajna cijena u BiH
+const SYSTEM_COST_KM_PER_KW = 2350;    // instalirana cijena po kW
 const CO2_KG_PER_KWH = 0.4;            // grid emission factor
 
 @Injectable()
@@ -73,8 +73,8 @@ export class SolarCalculatorService {
     // ── 3. Financial & environmental outputs ─────────────────────────────────
     const annualProductionKwh = systemKw * peakSunHours * 365 * SYSTEM_EFFICIENCY;
     const selfSufficiency = Math.min(100, (annualProductionKwh / dto.annualKwh) * 100);
-    const annualSavings = Math.min(annualProductionKwh, dto.annualKwh) * ELECTRICITY_PRICE_EUR_KWH;
-    const systemCost = systemKw * SYSTEM_COST_EUR_PER_KW;
+    const annualSavings = Math.min(annualProductionKwh, dto.annualKwh) * ELECTRICITY_PRICE_KM_KWH;
+    const systemCost = systemKw * SYSTEM_COST_KM_PER_KW;
     const paybackYears = annualSavings > 0 ? systemCost / annualSavings : 0;
     const co2Saved = annualProductionKwh * CO2_KG_PER_KWH;
 
@@ -92,10 +92,10 @@ export class SolarCalculatorService {
       numberOfPanels,
       roofCoveragePercent: Math.round((roofAreaUsed / dto.roofAreaSqm) * 100),
       selfSufficiencyPercent: Math.round(selfSufficiency * 10) / 10,
-      estimatedAnnualSavingsEur: Math.round(annualSavings),
-      estimatedMonthlySavingsEur: Math.round(annualSavings / 12),
+      estimatedAnnualSavingsKm: Math.round(annualSavings),
+      estimatedMonthlySavingsKm: Math.round(annualSavings / 12),
       estimatedPaybackYears: Math.round(paybackYears * 10) / 10,
-      estimatedSystemCostEur: Math.round(systemCost),
+      estimatedSystemCostKm: Math.round(systemCost),
       peakSunHoursPerDay: peakSunHours,
       co2SavedKgPerYear: Math.round(co2Saved),
       co2SavedTonsPerYear: Math.round((co2Saved / 1000) * 10) / 10,

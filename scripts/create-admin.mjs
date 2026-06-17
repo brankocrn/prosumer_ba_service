@@ -15,7 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
 // ── Load .env manually (no dotenv dependency needed) ─────────────────────────
-const envPath = resolve(__dirname, '../.env');
+const envPath = resolve(__dirname, '../.env.production');
 if (existsSync(envPath)) {
   for (const line of readFileSync(envPath, 'utf8').split('\n')) {
     const [key, ...rest] = line.split('=');
