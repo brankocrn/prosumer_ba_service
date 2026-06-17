@@ -9,7 +9,16 @@ async function bootstrap() {
   fs.mkdirSync('./uploads/invoices', { recursive: true });
 
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'https://solarfe.jolly-boat-2c56.workers.dev',
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
 
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
