@@ -49,7 +49,7 @@ export class SolarLead {
   locationLabel: string;
 
   // ── Calculator inputs ──────────────────────────────────────────────────────
-  @Column({ type: 'decimal', precision: 8, scale: 2 })
+  @Column({ type: 'decimal', precision: 8, scale: 2, nullable: true })
   monthlyBillKm: number;
 
   @Column({ type: 'decimal', precision: 8, scale: 2 })
